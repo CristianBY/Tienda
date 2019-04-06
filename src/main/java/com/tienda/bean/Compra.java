@@ -1,4 +1,4 @@
-package bean;
+package com.tienda.bean;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ public class Compra {
 
   public Compra() {
     cliente = new Cliente();
-    comprado = new List<ItemCompra>();
-    numFac = 0;
+    comprado = new ArrayList<ItemCompra>();
+    numFac = -1;
     fecha = new java.util.Date();
   }
 

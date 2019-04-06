@@ -1,4 +1,4 @@
-package bean;
+package com.tienda.bean;
 
 public class Cliente {
 

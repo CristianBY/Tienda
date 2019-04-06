@@ -1,4 +1,4 @@
-package bean;
+package com.tienda.bean;
 
 public class ItemCompra extends Producto{
 	
@@ -7,12 +7,12 @@ public class ItemCompra extends Producto{
 	public ItemCompra() {
 
 	}
-	public ItemCompra(int sku,double precio,String name,double cantidad) {
+	public ItemCompra(int sku,String name,double precio,double cantidad) {
 		super(sku,name,precio);
 		this.cantidad = cantidad;
 	}
 	public ItemCompra(Producto p, double cantidad) {
-		super(p.getSku(),p,getName(),p.getPrecio());
+		super(p.getSku(),p.getName(),p.getPrecio());
 		this.cantidad = cantidad;
 	}
 
