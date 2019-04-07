@@ -51,7 +51,7 @@ public class AppTiendaGUI extends Application{
 		//productos.setPrefHeight(70);
 
 		VBox root = new VBox();
-		root.getChildren().addAll(btn1,messageLbl,productos,cb,respuesta);
+		root.getChildren().addAll(messageLbl,productos,cb,respuesta);
 		root.setMinSize(350, 250);
 		root.setStyle("-fx-padding: 10;" +
 				"-fx-border-style: solid inside;" +
