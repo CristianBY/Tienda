@@ -33,8 +33,8 @@ public class DAOImpProductoBD implements DAOProducto{
   }
 
 	public List<Producto> leerTodos(){
-		Producto producto;
-		List<Producto> albaran = new ArrayList<Producto>();
+    Producto producto;
+    List<Producto> albaran = new ArrayList<Producto>();
 		String sql = "SELECT Sku, Name, Precio FROM albaran";
       try{
 				Statement stmt = con.createStatement();

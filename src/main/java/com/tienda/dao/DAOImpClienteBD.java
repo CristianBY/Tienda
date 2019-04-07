@@ -20,18 +20,18 @@ public class DAOImpClienteBD implements DAOCliente {
 	public DAOImpClienteBD(){
 		try {
 			con = DriverManager.getConnection("jdbc:sqlite:datos/tienda.db");
-    } catch (SQLException e) {
-    	System.out.println(e.getMessage());
-    }
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public DAOImpClienteBD(String conexion){ // Para cualquier conexion p.ej con mysql
-    try {
-      con = DriverManager.getConnection(conexion);
-    } catch (SQLException e) {
-      System.out.println(e.getMessage());
-    }
-  }
+    	try {
+      		con = DriverManager.getConnection(conexion);
+    	} catch (SQLException e) {
+      		System.out.println(e.getMessage());
+    	}
+	}
 
 	public void grabar (Cliente cliente) {
 		List<Cliente> clientes = null;
@@ -61,36 +61,36 @@ public class DAOImpClienteBD implements DAOCliente {
 		String sql = "SELECT Nombre, Dni, Direccion FROM cliente WHERE Dni LIKE '"+dni+"'";
 		try {
 			Statement stmt = con.createStatement();
-    	ResultSet rs = stmt.executeQuery(sql);
-    	cliente = new Cliente(rs.getString("Nombre"),rs.getString("Dni"),rs.getString("Direccion"));
-    } catch (SQLException e) {
-    	System.out.println("***" + e.getMessage() + "***");
-    }
-    return cliente;
+			ResultSet rs = stmt.executeQuery(sql);
+			cliente = new Cliente(rs.getString("Nombre"),rs.getString("Dni"),rs.getString("Direccion"));
+		} catch (SQLException e) {
+			System.out.println("***" + e.getMessage() + "***");
+    	}
+		return cliente;
 	}
 
 	public List<Cliente> leerTodos () {
 		Cliente cliente;
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		String sql = "SELECT Nombre, Dni, Direccion FROM cliente";
-      try{
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);
-        while (rs.next()) {
-        	cliente = new Cliente(rs.getString("Nombre"),rs.getString("Dni"),rs.getString("Direccion"));
-        	clientes.add(cliente);
-        }
-      } catch (SQLException e) {
-        System.out.println(e.getMessage());
-      }  
-    return clientes;
+		try{
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				cliente = new Cliente(rs.getString("Nombre"),rs.getString("Dni"),rs.getString("Direccion"));
+				clientes.add(cliente);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}  
+		return clientes;
 	}
 
 	public void cerrar() {
-    try {
-    	con.close();
-    } catch (SQLException e) {
-    	System.out.println(e.getMessage());
-    }  
-  }
+		try {
+			con.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}  
+	}
 }
