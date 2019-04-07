@@ -35,25 +35,24 @@ public class Cliente {
 		this.direccion = direccion;
 	}
 
-	@ Override
+	@Override
 	public String toString() {
 		return "Cliente: "+nombre+" "+dni+" "+direccion;
 	}
 
 	@Override
 	public boolean equals(Object o) {
-      if (o == null) return false;
-      if (o == this) return true;
-      if (!(o instanceof Cliente)){
-        return false;
-      }
-      Cliente cliente = (Cliente) o;
-      if(dni.equals(cliente.getDni())) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    }
+		if (o == null) return false;
+		if (o == this) return true;
+		if (!(o instanceof Cliente)){
+			return false;
+		}
+		Cliente cliente = (Cliente) o;
+		if(dni.equals(cliente.getDni())) {
+			return true;
+    } else {
+			return false;
+		}
+	}
 
 }

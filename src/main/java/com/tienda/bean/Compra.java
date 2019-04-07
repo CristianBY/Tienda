@@ -63,7 +63,7 @@ public class Compra {
     return fecha;
   }
 
-  @ Override
+  @Override
   public String toString() {
     String cadena;
     double total = 0;
