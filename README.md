@@ -1,4 +1,4 @@
-#Tienda
+# Tienda
 
 Es un proyecto maven
 ```
@@ -8,6 +8,9 @@ $ mvn package
 mvn exec:java -Dexec.mainClass="com.tienda.gui.AppTiendaBD"
 ```
 Falta la GUI
+```
+mvn exec:java -Dexec.mainClass="com.tienda.gui.AppTiendaGUI"
+```
 
 ## Comenzando 🚀
 
@@ -51,7 +54,7 @@ Desde un terminal en el raíz.
 $ mvn package
 ```
 ```
-mvn exec:java -Dexec.mainClass="com.tienda.gui.AppTiendaBD"
+mvn exec:java -Dexec.mainClass="com.tienda.gui.AppTiendaGUI"
 ```
 
 ## Autores ✒️
