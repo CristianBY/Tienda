@@ -38,17 +38,15 @@ public class DAOImpCompraBD implements DAOCompra {
   }
 
   public void grabar (Compra compra) { // Almacena los datos de una compra en la BD
-    String sql = "INSERT INTO compra (Factura,Sku,Dni,Fecha,Unidades) VALUES(?,?,?,?,?)";
-    SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
-    String fechaComoCadena = sdf.format(compra.getFecha());
+    String sql = "INSERT INTO compra (Factura,Sku,Dni,Fecha,Unidades) VALUES(?,?,?,DATETIME('NOW'),?)";
+  
     try{
       PreparedStatement pstmt = con.prepareStatement(sql);
       for (ItemCompra item : compra.getComprado()) {
         pstmt.setInt(1, compra.getNumFac());
         pstmt.setInt(2, item.getSku());
         pstmt.setString(3, compra.getCliente().getDni());
-        pstmt.setString(4, fechaComoCadena);
-        pstmt.setDouble(5, item.getCantidad());
+        pstmt.setDouble(4, item.getCantidad());
         pstmt.executeUpdate();
       }
       System.out.println("Insertada en la DB ");
@@ -81,20 +79,17 @@ public class DAOImpCompraBD implements DAOCompra {
       Statement stmt = con.createStatement();
       ResultSet rs = stmt.executeQuery(sql);
       cliente=new Cliente(rs.getString("Dni"),rs.getString("Nombre"),rs.getString("Direccion"));
-      SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
-      Date fecha = sdf.parse(rs.getString("Fecha"));
+      //Date fecha = rs.getDate("Fecha");
       while (rs.next()) {
         item = new ItemCompra(rs.getInt("Sku"),rs.getString("Name"),rs.getDouble("Precio"),rs.getDouble("Unidades"));
         comprado.add(item);
       }
-      compra = new Compra(cliente,comprado,numFac,fecha);
+      compra = new Compra(cliente,comprado,numFac);
       
     } catch (SQLException e) {
       System.out.println("***" + e.getMessage() + "***");
       return compra = new Compra();
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
+    }  
     return compra;
   }
 
@@ -102,7 +97,7 @@ public class DAOImpCompraBD implements DAOCompra {
     try {
       con.close();
     } catch (SQLException e) {
-      System.out.println(e.getMessage());
+      System.out.println( e.getMessage());
     }  
   }
 }
