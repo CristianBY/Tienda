@@ -12,10 +12,10 @@ public class AppTiendaBD {
 		String conexion = "jdbc:sqlite:datos/tienda.db"; // Para cualquier conexion de base de datos
 		DAOCompra dao = null;
 		DAOProducto dao2 = new DAOImpProductoBD(conexion);
-		DAOCliente dao3 = null;
+		DAOCliente dao3 = new DAOImpClienteBD(conexion);
 		List<Producto> albaran = null;
-		List<ItemCompra> comprado= null;
-		Cliente cliente = null;
+		List<ItemCompra> comprado= new ArrayList<ItemCompra>(); 
+		Cliente cliente = new Cliente();
 		Producto producto = null;
 		Compra compra = null;
 		int numFac = 0;
@@ -24,6 +24,7 @@ public class AppTiendaBD {
 		boolean tiendaAbierta = true;
 									
 									/*TEXTO DE BIENVENIDA*/
+		
 		System.out.println("\n********Bienvenido a la Fruteria Pepe********\nHoy tenemos a la venta los siguientes artículos:\n");
     albaran = dao2.leerTodos();
     for (Producto p : albaran){
@@ -34,11 +35,10 @@ public class AppTiendaBD {
     			/*VENTA*/
     while (tiendaAbierta){
 	    System.out.println("\n****Datos de cliente*****");
-	    comprado= new ArrayList<ItemCompra>(); 
-			cliente = new Cliente();
-			System.out.print("Dni: ");
+	    System.out.print("Dni: ");
+	    
 			cliente.setDni(sc.nextLine());
-			dao3 = new DAOImpClienteBD(conexion);
+			
 			dao3.grabar(cliente);//Graba si no está almacenado en la base de datos
 			dao3.cerrar();	
 			while(clienteComprando) {
@@ -69,7 +69,7 @@ public class AppTiendaBD {
 	  }
 	  dao = new DAOImpCompraBD(conexion);
 	System.out.println(dao.ticket(numFac)); //Imprime ticket en este caso el ultimo registrado
-    System.out.println(dao.ticket(numFac-1));
+    System.out.println(dao.ticket(numFac - 1));
     
     dao.cerrar();
     dao3.cerrar();

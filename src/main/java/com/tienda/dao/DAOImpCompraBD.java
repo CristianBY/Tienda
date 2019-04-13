@@ -38,7 +38,7 @@ public class DAOImpCompraBD implements DAOCompra {
   }
 
   public void grabar (Compra compra) { // Almacena los datos de una compra en la BD
-    String sql = "INSERT INTO compra (Factura,Sku,Dni,Fecha,Unidades) VALUES(?,?,?,DATETIME('NOW'),?)";
+    String sql = "INSERT INTO compra (Factura,Sku,Dni,Fecha,Unidades) VALUES(?,?,?,DATE('NOW'),?)";
   
     try{
       PreparedStatement pstmt = con.prepareStatement(sql);
@@ -79,17 +79,20 @@ public class DAOImpCompraBD implements DAOCompra {
       Statement stmt = con.createStatement();
       ResultSet rs = stmt.executeQuery(sql);
       cliente=new Cliente(rs.getString("Dni"),rs.getString("Nombre"),rs.getString("Direccion"));
-      //Date fecha = rs.getDate("Fecha");
+      Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("Fecha"));	
       while (rs.next()) {
         item = new ItemCompra(rs.getInt("Sku"),rs.getString("Name"),rs.getDouble("Precio"),rs.getDouble("Unidades"));
         comprado.add(item);
       }
-      compra = new Compra(cliente,comprado,numFac);
+      compra = new Compra(cliente,comprado,numFac,fecha);
       
     } catch (SQLException e) {
       System.out.println("***" + e.getMessage() + "***");
       return compra = new Compra();
-    }  
+    } catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}  
     return compra;
   }
 
