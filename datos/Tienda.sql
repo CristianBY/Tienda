@@ -17,7 +17,7 @@ CREATE TABLE compra
 Factura NUMBER NOT NULL,
 Sku NUMBER NOT NULL,
 Dni TEXT NOT NULL,
-Fecha TEXT NOT NULL,
+Fecha strftime('%Y-%m-%d','now'),
 Unidades NUMBER NOT NULL,
 CONSTRAINT FK_albaran_compra FOREIGN KEY (Sku)
 REFERENCES albaran (Sku),
