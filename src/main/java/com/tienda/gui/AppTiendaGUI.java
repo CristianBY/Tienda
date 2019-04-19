@@ -7,8 +7,11 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -35,19 +38,25 @@ public class AppTiendaGUI extends Application{
 			
 			Scene sceneInicial; 
 			Button buscar = new Button ("_Buscar");
+			
 			Button comprar = new Button ("_Comprar");
 			Button inicio = new Button ("_Inicio");
+			
+			
 		
 			
-			FlowPane botonera= new FlowPane(buscar , comprar,inicio);
+			HBox botonera= new HBox(buscar , comprar,inicio);
+			botonera.setTranslateX(300);
+			botonera.setTranslateY(300);
+			botonera.setSpacing(15);
 			
 			VBox rootInicial = new VBox (botonera);
 		
-			sceneInicial = new Scene (rootInicial,400,400);
+			sceneInicial = new Scene (rootInicial,800,800);
 		
 			inicio.setOnAction(e -> {
 					
-					
+					botonera.setTranslateY(300);
 					rootInicial.getChildren().clear();
 					rootInicial.getChildren().add(botonera);
 					
@@ -55,9 +64,12 @@ public class AppTiendaGUI extends Application{
 					);			
 			buscar.setOnAction(e -> 
 			{
+			rootInicial.getChildren().clear();
+			rootInicial.getChildren().add(botonera);
+			botonera.setTranslateY(0);
 			
-	
 			rootInicial.getChildren().add(b.box());
+			
 			}
 			);
 			

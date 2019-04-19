@@ -43,7 +43,6 @@ public class BuscaFactura extends Application{
 		double total = 0.0;
 
 		compra = busqueda2.ticket(parametro1);
-		System.out.println(compra);
 	
  		Label Factura = new Label("Factura"+ compra.getNumFac());
 		Label dniNombre = new Label(compra.getCliente().getDni() +"--" + compra.getCliente().getNombre());
@@ -65,6 +64,11 @@ public class BuscaFactura extends Application{
 		box.setStyle(
 				""
 						+ "-fx-background-color:white;"
+						+"-fx-border-style: solid inside;"
+					    +"-fx-border-style: solid inside;" 
+						+"-fx-border-width: 1;" 
+						+"-fx-border-radius: 1;" 
+					    +"-fx-border-color: black;"
 				);
 		
 		return box;
@@ -72,22 +76,30 @@ public class BuscaFactura extends Application{
 	} 
 	public VBox box ()
 	{	
+		
 		BuscaFactura b = new BuscaFactura();
 		Label label = new Label("Introduce el número de factura");
 		
 		TextField text = new TextField();
-		text.setLayoutX(150);
-		   //   text.setY(75); 
 		Button b1 = new Button("_Buscar");
-	
+		label.setTranslateX(250);
+		b1.setTranslateX(250);
+		text.setTranslateX(250);
 		VBox rootFacturas = new VBox(label,text,b1);
+
+
+		
 		rootFacturas.setMaxSize(250, 250);
 
 	
 		b1.setOnAction(e -> {
 		
-		
-           rootFacturas.getChildren().add(b.busqueda((Integer.parseInt(text.getText()))));
+			rootFacturas.getChildren().clear();
+			rootFacturas.getChildren().addAll(label,text,b1);
+			VBox factura = new VBox(b.busqueda((Integer.parseInt(text.getText()))));
+			rootFacturas.getChildren().add(factura);
+			factura.setTranslateX(250);
+    
 	
 		
 		});
