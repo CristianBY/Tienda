@@ -70,5 +70,4 @@ mvn exec:java -Dexec.mainClass="com.tienda.gui.AppTiendaGUI"
 * [LICENSE](LICENSE.md)
 
 ---
-Por [CristianBY](https://github.com/CristianBY) -
-Por [lbullon](https://github.com/lbullon) ⌨
+Por [CristianBY](https://github.com/CristianBY) y [lbullon](https://github.com/lbullon) ⌨
