@@ -36,9 +36,9 @@ https://github.com/CristianBY/Tienda.git
 
 ## Requisitos 📋
 
-Tener instalado jdk1.8.0_191.
-Un IDE Eclipse, Netbeans.
-Tener instaldos los comandos maven en las variables de entorno.
+Tener instalado jdk1.8.0_191. 
+Un IDE Eclipse, Netbeans. 
+Tener instalados los comandos maven en las variables de entorno. 
 Tener sqlite3.
 
 
