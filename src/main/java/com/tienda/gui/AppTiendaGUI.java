@@ -7,11 +7,8 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -32,53 +29,54 @@ public class AppTiendaGUI extends Application{
 	 Compra compra = new Compra();
 	 Cliente cliente = new Cliente();
 	 BuscaFactura b = new BuscaFactura();
+	 CompraCliente compraCliente = new CompraCliente();
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
 			Scene sceneInicial; 
 			Button buscar = new Button ("_Buscar");
-			
 			Button comprar = new Button ("_Comprar");
 			Button inicio = new Button ("_Inicio");
-			
-			
-		
+			String cssButton = "-fx-text-fill: white;"
+    						+"-fx-font-weight: bold;"
+    						+"-fx-background-color: linear-gradient(#61a2b1, #2A5058);"
+    						+"-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );";
+			buscar.setStyle(cssButton);
+			comprar.setStyle(cssButton);
+			inicio.setStyle(cssButton);
+
 			
 			HBox botonera= new HBox(buscar , comprar,inicio);
-			botonera.setTranslateX(300);
-			botonera.setTranslateY(300);
+			botonera.setTranslateX(200);
+			botonera.setTranslateY(0);
 			botonera.setSpacing(15);
 			
 			VBox rootInicial = new VBox (botonera);
 		
-			sceneInicial = new Scene (rootInicial,800,800);
+			sceneInicial = new Scene (rootInicial,600,600);
 		
 			inicio.setOnAction(e -> {
 					
-					botonera.setTranslateY(300);
-					rootInicial.getChildren().clear();
-					rootInicial.getChildren().add(botonera);
+				rootInicial.getChildren().clear();
+				rootInicial.getChildren().add(botonera);
 					
-			}
-					);			
-			buscar.setOnAction(e -> 
-			{
-			rootInicial.getChildren().clear();
-			rootInicial.getChildren().add(botonera);
-			botonera.setTranslateY(0);
-			
-			rootInicial.getChildren().add(b.box());
-			
-			}
-			);
-			
+			});
 
+			buscar.setOnAction(e -> {
+				
+				rootInicial.getChildren().clear();
+				rootInicial.getChildren().add(botonera);
+				rootInicial.getChildren().add(b.box());
+			});
 			
-
+			comprar.setOnAction(e -> {
+				
+				rootInicial.getChildren().clear();
+				rootInicial.getChildren().add(botonera);
+				rootInicial.getChildren().add(compraCliente.box());
+			});
 			
-		
-
 
 			rootInicial.setStyle(
 					""
@@ -87,7 +85,6 @@ public class AppTiendaGUI extends Application{
 						    "-fx-background-position: center center;"
 					);
 		
-
 			primaryStage.setScene(sceneInicial);
 			primaryStage.show();
 		} catch(Exception e) {

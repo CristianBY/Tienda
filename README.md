@@ -1,13 +1,14 @@
 # Tienda
 
-Es un proyecto maven
+Es un proyecto maven.
+Es un proyecto realizado en Java para la clase de programación de Desarrollo de Aplicaciones Web.  
+La finalidad del proyecto es realizar la compra de uno o varios productos por un cliente.
+Intenta mostrar la realidad de una tienda normal, la compra de varios artículos por sus clientes.
+Para el funcionamiento de una tienda es necesario conocer los artículos de los que disponemos, los datos de los clientes y la información de sus compras.
+
 ```
 $ mvn package
 ```
-```
-mvn exec:java -Dexec.mainClass="com.tienda.gui.AppTiendaBD"
-```
-Falta la GUI
 ```
 mvn exec:java -Dexec.mainClass="com.tienda.gui.AppTiendaGUI"
 ```
@@ -17,7 +18,7 @@ mvn exec:java -Dexec.mainClass="com.tienda.gui.AppTiendaGUI"
 _Use el comando git_
 
 ```
-$ git clone https://github.com/lbullon/Tienda.git
+$ git clone https://github.com/lbullon/Tienda-1.git
 ```
 
 ```
@@ -26,7 +27,7 @@ $ git clone https://github.com/CristianBY/Tienda.git
 _Checkout con svn use la URL:_
 
 ```
-https://github.com/lbullon/Tienda.git
+https://github.com/lbullon/Tienda-1.git
 ```
 
 ```

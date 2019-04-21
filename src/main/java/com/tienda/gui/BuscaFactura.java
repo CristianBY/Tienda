@@ -17,13 +17,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ChoiceBox;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
-
 
 import com.tienda.bean.*;
 import com.tienda.dao.*;
@@ -31,82 +28,54 @@ import com.tienda.dao.*;
 public class BuscaFactura extends Application{
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
+	public void start(Stage facturaStage) throws Exception {
 		
 	}
-	public VBox busqueda (int parametro1) {
+	public VBox busqueda(int parametro1) {
 		Compra compra = new Compra();
 		DAOImpCompraBD busqueda2 = new DAOImpCompraBD();
-		String productos = null;
 		VBox box = new VBox();
-		double total = 0.0;
-
 		compra = busqueda2.ticket(parametro1);
-	
- 		Label Factura = new Label("Factura"+ compra.getNumFac());
-		Label dniNombre = new Label(compra.getCliente().getDni() +"--" + compra.getCliente().getNombre());
-		Label direccion = new Label(compra.getCliente().getDireccion());
-		box.getChildren().add(Factura);
-		box.getChildren().add(dniNombre);
-		box.getChildren().add(direccion);
-
-		for (ItemCompra i : compra.getComprado()) {
-			total += i.getPrecio()*i.getCantidad();
-			productos = i.getSku() + "   " + i.getName()+ " " + i.getCantidad() + "_________" + i.getCantidad()*i.getPrecio() + "€";
-			Label comprado = new Label(productos);
-			box.getChildren().add(comprado);
-			
-			
-		}
-		Label precio = new Label("Total a pagar " + total + "€");
-		box.getChildren().add(precio);
-		box.setStyle(
+		TextArea factura = new TextArea(compra.toString());
+		box.getChildren().add(factura);
+		factura.setStyle(
 				""
 						+ "-fx-background-color:white;"
 						+"-fx-border-style: solid inside;"
 					    +"-fx-border-style: solid inside;" 
 						+"-fx-border-width: 1;" 
 						+"-fx-border-radius: 1;" 
-					    +"-fx-border-color: black;"
+					    +"-fx-border-color: blue;"
 				);
-		
+		factura.setTranslateY(50);
+		factura.setTranslateX(200);
+		factura.setMinSize(250, 250);
 		return box;
 		
 	} 
-	public VBox box ()
-	{	
-		
+	public VBox box() {
 		BuscaFactura b = new BuscaFactura();
 		Label label = new Label("Introduce el número de factura");
 		
 		TextField text = new TextField();
+		text.setLayoutX(50);
+
 		Button b1 = new Button("_Buscar");
-		label.setTranslateX(250);
-		b1.setTranslateX(250);
-		text.setTranslateX(250);
+		b1.setStyle("-fx-text-fill: white;"
+    				+"-fx-font-weight: bold;"
+    				+"-fx-background-color: linear-gradient(#61a2b1, #2A5058);"
+    				+"-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );");
+	
 		VBox rootFacturas = new VBox(label,text,b1);
-
-
-		
 		rootFacturas.setMaxSize(250, 250);
 
-	
 		b1.setOnAction(e -> {
-		
 			rootFacturas.getChildren().clear();
-			rootFacturas.getChildren().addAll(label,text,b1);
-			VBox factura = new VBox(b.busqueda((Integer.parseInt(text.getText()))));
-			rootFacturas.getChildren().add(factura);
-			factura.setTranslateX(250);
-    
-	
+        	rootFacturas.getChildren().add(b.busqueda((Integer.parseInt(text.getText()))));
 		
 		});
 
-
-
-		
+	
 		return rootFacturas;
 		
 	}	

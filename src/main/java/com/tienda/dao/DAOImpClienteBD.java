@@ -34,26 +34,18 @@ public class DAOImpClienteBD implements DAOCliente {
 	}
 
 	public void grabar (Cliente cliente) {
-		List<Cliente> clientes = null;
-		Scanner sc = new Scanner(System.in);
-		clientes = leerTodos();
-		if (!clientes.contains(cliente)){
-			System.out.print("Nombre: ");
-			cliente.setNombre(sc.nextLine());
-			System.out.print("Direccion: ");
-			cliente.setDireccion(sc.nextLine());
-			String sql = "INSERT INTO cliente(Nombre,Dni,Direccion) VALUES(?,?,?)";
-	   		try{
-	   			PreparedStatement pstmt = con.prepareStatement(sql);
-      			pstmt.setString(1, cliente.getNombre());
-       			pstmt.setString(2, cliente.getDni());
-	      		pstmt.setString(3, cliente.getDireccion());
-	      		pstmt.executeUpdate();
-	      		System.out.println("Insertado cliente en la DB ");
-	   		} catch (SQLException e) {
-	     		System.out.println("***" + e.getMessage() + "***");
-	   		}
-	   	}	  	   
+		String sql = "INSERT INTO cliente(Nombre,Dni,Direccion) VALUES(?,?,?)";
+	   	try{
+	   		PreparedStatement pstmt = con.prepareStatement(sql);
+      		pstmt.setString(1, cliente.getNombre());
+       		pstmt.setString(2, cliente.getDni());
+	      	pstmt.setString(3, cliente.getDireccion());
+	      	pstmt.executeUpdate();
+	     	System.out.println("Insertado cliente en la DB ");
+	   	} catch (SQLException e) {
+	    	System.out.println("***" + e.getMessage() + "***");
+	   	}
+	   		  	   
 	}
 
 	public Cliente leer (String dni) {

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 import com.tienda.bean.*;
 
 
@@ -38,15 +39,18 @@ public class DAOImpCompraBD implements DAOCompra {
   }
 
   public void grabar (Compra compra) { // Almacena los datos de una compra en la BD
-    String sql = "INSERT INTO compra (Factura,Sku,Dni,Fecha,Unidades) VALUES(?,?,?,DATE('NOW'),?)";
+    String sql = "INSERT INTO compra (Factura,Sku,Dni,Fecha,Unidades) VALUES(?,?,?,?,?)";
   
     try{
       PreparedStatement pstmt = con.prepareStatement(sql);
       for (ItemCompra item : compra.getComprado()) {
+        java.util.Date utilDate = compra.getFecha();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         pstmt.setInt(1, compra.getNumFac());
         pstmt.setInt(2, item.getSku());
         pstmt.setString(3, compra.getCliente().getDni());
-        pstmt.setDouble(4, item.getCantidad());
+        pstmt.setDate(4, sqlDate);
+        pstmt.setDouble(5, item.getCantidad());
         pstmt.executeUpdate();
       }
       System.out.println("Insertada en la DB ");
@@ -79,7 +83,7 @@ public class DAOImpCompraBD implements DAOCompra {
       Statement stmt = con.createStatement();
       ResultSet rs = stmt.executeQuery(sql);
       cliente=new Cliente(rs.getString("Dni"),rs.getString("Nombre"),rs.getString("Direccion"));
-      Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("Fecha"));	
+      Date fecha = rs.getDate("Fecha");	
       while (rs.next()) {
         item = new ItemCompra(rs.getInt("Sku"),rs.getString("Name"),rs.getDouble("Precio"),rs.getDouble("Unidades"));
         comprado.add(item);
@@ -89,10 +93,7 @@ public class DAOImpCompraBD implements DAOCompra {
     } catch (SQLException e) {
       System.out.println("***" + e.getMessage() + "***");
       return compra = new Compra();
-    } catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}  
+    }  
     return compra;
   }
 
