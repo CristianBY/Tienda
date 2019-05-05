@@ -32,28 +32,29 @@ public class RealizarCompra extends Application{
 		
 	}
 
-	public VBox box (Cliente cliente)
-	{	
+	public VBox box (Cliente cliente) {	
 		DAOProducto daoProducto = new DAOImpProductoBD();
-		List carrito = new ArrayList<ItemCompra>();
+		List<ItemCompra> carrito = new ArrayList<ItemCompra>();
 		Label label = new Label("Productos");
 		Label labelCantidad = new Label("Cantidad");
 		ChoiceBox listaProductos = new ChoiceBox(FXCollections.observableArrayList(daoProducto.leerTodos()));
 		TextField textCantidad = new TextField();
 		textCantidad.setMaxWidth(80);
-		Button b1 = new Button("_Al carrito");
-		Button b2 = new Button("_Finalizar");
+		Button alCarrito = new Button("_Al carrito");
+		Button finalizar = new Button("_Finalizar");
+		Button verCarrito = new Button("_Ver carrito");
 		String cssButton = "-fx-text-fill: white;"
     						+"-fx-font-weight: bold;"
     						+"-fx-background-color: linear-gradient(#61a2b1, #2A5058);"
     						+"-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );";
-		b1.setStyle(cssButton);
-		b2.setStyle(cssButton);
+		alCarrito.setStyle(cssButton);
+		finalizar.setStyle(cssButton);
+		verCarrito.setStyle(cssButton);
 		
-		VBox rootCompra = new VBox(label,listaProductos,labelCantidad,textCantidad,b1,b2);
+		VBox rootCompra = new VBox(label,listaProductos,labelCantidad,textCantidad,alCarrito,verCarrito,finalizar);
 		rootCompra.setMaxSize(250, 250);
 
-		b1.setOnAction(e -> {
+		alCarrito.setOnAction(e -> {
 			Producto producto = (Producto)listaProductos.getValue();
 			double cantidad = Double.parseDouble(textCantidad.getText());
 			ItemCompra item = new ItemCompra(producto,cantidad);
@@ -61,7 +62,12 @@ public class RealizarCompra extends Application{
 			textCantidad.clear();
 		});
 
-		b2.setOnAction(e -> {
+		verCarrito.setOnAction(e -> {
+			CarritoCompra carritoCompra = new CarritoCompra();
+			rootCompra.getChildren().add(carritoCompra.mostrarCarritoCompra(carrito));
+		});
+
+		finalizar.setOnAction(e -> {
 			rootCompra.getChildren().clear();
 			DAOCompra daoCompra = new DAOImpCompraBD();
 			int factura = daoCompra.enumerar();
@@ -72,6 +78,8 @@ public class RealizarCompra extends Application{
 			TextArea facturaImp = new TextArea(compra.toString());
 			rootCompra.getChildren().add(facturaImp);
 		});
+
+
 	
 		return rootCompra;
 		
