@@ -97,6 +97,27 @@ public class DAOImpCompraBD implements DAOCompra {
     return compra;
   }
 
+  public ArrayList tickets (String dni) { //Devuelve una compra de una factura pedida
+
+	  	ArrayList <String> l = new ArrayList <String>();
+	    String sql = "SELECT DISTINCT FACTURA FROM COMPRA WHERE Dni = '" + dni +"';";
+	    try {
+	      Statement stmt = con.createStatement();
+	      ResultSet rs = stmt.executeQuery(sql);
+	      
+	      while (rs.next()) {
+	        String s = rs.getString("Factura");
+	        l.add(s);
+	      }
+	     
+	      
+	    } catch (SQLException e) {
+	 
+	    }  
+	    return l;
+	  }
+  
+  
   public void cerrar() { //Cierra la conexion
     try {
       con.close();
