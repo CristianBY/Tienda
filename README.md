@@ -18,7 +18,7 @@ mvn exec:java -Dexec.mainClass="com.tienda.gui.AppTiendaGUI"
 _Use el comando git_
 
 ```
-$ git clone https://github.com/lbullon/Tienda-1.git
+$ git clone https://github.com/lbullon/Tienda-2.git
 ```
 
 ```
@@ -27,7 +27,7 @@ $ git clone https://github.com/CristianBY/Tienda.git
 _Checkout con svn use la URL:_
 
 ```
-https://github.com/lbullon/Tienda-1.git
+https://github.com/lbullon/Tienda-2.git
 ```
 
 ```

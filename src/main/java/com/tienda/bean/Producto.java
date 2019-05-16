@@ -2,9 +2,9 @@ package com.tienda.bean;
 
 public class Producto {
 
-  private Integer sku;
-  private String name;
-  private Double precio;
+  protected Integer sku;
+  protected String name;
+  protected Double precio;
 
   public Producto() {
   
